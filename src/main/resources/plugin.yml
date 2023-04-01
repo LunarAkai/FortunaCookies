@@ -1,0 +1,11 @@
+name: FortunaCookies
+version: '${project.version}'
+main: de.lunarakai.fortunacookies.FortunaCookies
+api-version: 1.19
+author: LunarAkai
+commands:
+    fortunacookie:
+      description: Main Command
+      usage: /<command>
+      permission: fortunacookies.fc
+      aliases: fc
