@@ -1,0 +1,10 @@
+#Translatable Words
+Translatables:
+  FortuneCookieTranslatable: "Glückskeks"
+  FortuneTellingTranslatable: "Weissagung"
+  FortuneCookieRightClickTranslatable: "Rechts-Klick zum öffnen"
+  WarningNotEnoughInvSlots: "Du hast nicht genügend Platz im Inventar."
+FortuneTellingsList:
+  - "This is a fortune telling."
+  - "Banana"
+  - "Strawberry"

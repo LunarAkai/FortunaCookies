@@ -15,9 +15,11 @@ public final class FortunaCookies extends JavaPlugin {
 
         LOGGER = getLogger();
 
-        // Plugin startup logic
-        getServer().getPluginManager().registerEvents(new FortunaCookiesEventListener(), this);
-        this.getCommand("fortunacookie").setExecutor(new CommandFortunaCookie());
+        getConfig().options().copyDefaults();
+        saveDefaultConfig();
+
+        getServer().getPluginManager().registerEvents(new FortunaCookiesEventListener(this), this);
+        this.getCommand("fortunacookie").setExecutor(new CommandFortunaCookie(this));
 
     }
 
