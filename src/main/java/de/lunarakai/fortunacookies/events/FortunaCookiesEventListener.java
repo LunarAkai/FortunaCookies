@@ -11,6 +11,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
+import org.bukkit.event.inventory.InventoryCloseEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -19,12 +21,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 public class FortunaCookiesEventListener implements Listener {
 
     private FortunaCookies main;
     private ChatUtils chatUtils = new ChatUtils();
+    private List<Player> playerList = new ArrayList<>();
 
     public FortunaCookiesEventListener(FortunaCookies main) {
         this.main = main;
@@ -74,6 +78,8 @@ public class FortunaCookiesEventListener implements Listener {
 
                             fortuneTellingPaper.setItemMeta(fortuneTellingPaperMeta);
 
+
+
                             InventoryUtils inventoryUtils = new InventoryUtils();
                             Inventory inv = inventoryUtils.createFortuneCookieInventory(
                                     player,
@@ -84,6 +90,9 @@ public class FortunaCookiesEventListener implements Listener {
                                     fortuneTellingPaper);
 
                             player.openInventory(inv);
+
+                            playerList.add(player);
+
                             //TODO: Give player item if player closes inv while items are still inside
                         } else {
                             chatUtils.sendDefaultMessage(player, main.getConfig().getString("Translatables.WarningNotEnoughInvSlots"));
@@ -94,25 +103,40 @@ public class FortunaCookiesEventListener implements Listener {
         }
     }
 
-    /*
+    // list => if player opens inv => add to list
+    // check if player is on list if player closes inv
+    // give player items from inv if player is on the list
+
     @EventHandler
     public void onInventoryClose(InventoryCloseEvent e) {
         Player player = (Player) e.getPlayer();
         Inventory inventory = e.getInventory();
 
-        if(inventory.getType().equals(InventoryType.CHEST)) {
-            if (!inventory.getItem(12).equals(Material.AIR) && inventory.getItem(12).equals(Material.COOKIE)) {
-                ItemStack item1 = inventory.getItem(12);
-                player.getInventory().addItem(item1);
+        if(playerList.contains(player)) {
+            if(inventory.getType().equals(InventoryType.CHEST)) {
+                if (inventory.getItem(12) != null ) {
+                    ItemStack item = inventory.getItem(12);
+                    if(!Objects.equals(item, new ItemStack(Material.AIR)))
+                    {
+                        ItemStack item1 = inventory.getItem(12);
+                        player.getInventory().addItem(item1);
+                    }
+                }
+                if (inventory.getItem(14) != null ) {
+                    ItemStack item = inventory.getItem(14);
+                    if(!Objects.equals(item, new ItemStack(Material.AIR)))
+                    {
+                        ItemStack item2 = inventory.getItem(14);
+                        player.getInventory().addItem(item2);
+                    }
+                }
             }
 
-            if (!inventory.getItem(14).equals(Material.AIR) && inventory.getItem(12).equals(Material.PAPER)) {
-                ItemStack item2 = inventory.getItem(14);
-                player.getInventory().addItem(item2);
-            }
+            playerList.remove(player);
         }
+
     }
-    */
+
     private int getEmptySlots(Player player) {
         PlayerInventory inventory = player.getInventory();
         ItemStack[] content = inventory.getContents();
