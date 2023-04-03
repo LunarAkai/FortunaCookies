@@ -1,10 +1,12 @@
-#Translatable Words
 Translatables:
-  FortuneCookieTranslatable: "Glückskeks"
-  FortuneTellingTranslatable: "Weissagung"
-  FortuneCookieRightClickTranslatable: "Rechts-Klick zum öffnen"
-  WarningNotEnoughInvSlots: "Du hast nicht genügend Platz im Inventar."
-FortuneTellingsList:
+  FortuneCookieTranslatable: "Glückskeks" # Fortune Cookie
+  FortuneTellingTranslatable: "Weissagung" # Fortune Telling
+  FortuneCookieRightClickTranslatable: "Rechts-Klick zum öffnen" # Right-click to open
+  WarningNotEnoughInvSlots: "Du hast nicht genügend Platz im Inventar." # You don't have enough space in your inventory.
+FortuneTellingsList: # Add List of Fortune Tellings here !
   - "This is a fortune telling."
   - "Banana"
   - "Strawberry"
+# - more stuff here
+# -
+# -
